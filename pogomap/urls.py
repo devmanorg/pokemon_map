@@ -5,6 +5,6 @@ from pokemon_entities import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.all_pokemons_map, name="mainpage"),
-    path('pokemon/<slug:slug>/', views.show_pokemon, name="pokemon"),
+    path('', views.show_all_pokemons, name="mainpage"),
+    path('pokemon/<pokedex_no>/', views.show_pokemon, name="pokemon"),
 ]

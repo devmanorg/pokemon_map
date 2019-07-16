@@ -1,53 +1,57 @@
 import folium
 import json
 
-from django.http import Http404
+from django.http import HttpResponseNotFound
 from django.shortcuts import render
-# Create your views here.
 
 
-def make_pokemon_map(pokemons):
-    moscow_center = [55.8738792716378000, 37.5673603455195320]
-    folium_map = folium.Map(
-        location=moscow_center,
-        zoom_start=15,
+MOSCOW_CENTER = [55.751244, 37.618423]
+DEFAULT_IMAGE_URL = "https://vignette.wikia.nocookie.net/pokemon/images/6/6e/%21.png/revision/latest/fixed-aspect-ratio-down/width/240/height/240?cb=20130525215832&fill=transparent"
+
+def add_pokemon(folium_map, lat, lon, name, image_url=DEFAULT_IMAGE_URL):
+    icon = folium.features.CustomIcon(
+        image_url,
+        icon_size=(50, 50),
     )
+    folium.Marker(
+        [lat, lon],
+        tooltip=name,
+        icon=icon,
+    ).add_to(folium_map)
+    return folium_map
+
+
+def show_all_pokemons(request):
+    with open("pokemon_entities/pokemons.json") as database:
+        pokemons = json.load(database)['pokemons']
+
+    folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
     for pokemon in pokemons:
         for pokemon_entity in pokemon['entities']:
-            icon = folium.features.CustomIcon(
-                pokemon['img_url'],
-                icon_size=(50, 50),
-            )
-            folium.Marker(
-                [pokemon_entity['lat'], pokemon_entity['lon']],
-                tooltip=pokemon['title_ru'],
-                icon=icon,
-            ).add_to(folium_map)
-    html_map = folium_map._repr_html_()
-    return html_map
+            folium_map = add_pokemon(
+                folium_map, pokemon_entity['lat'], pokemon_entity['lon'],
+                pokemon['title_ru'], pokemon['img_url'])
+
+    return render(request, "mainpage.html", context={'map': folium_map._repr_html_(),
+                                                     'pokemons': pokemons})
 
 
-def all_pokemons_map(request):
+def show_pokemon(request, pokedex_no):
     with open("pokemon_entities/pokemons.json") as database:
         pokemons = json.load(database)['pokemons']
-    context = {
-        'map': make_pokemon_map(pokemons),
-        'pokemons': pokemons
-    }
-    return render(request, "mainpage.html", context=context)
 
-
-def show_pokemon(request, title_en):
-    with open("pokemon_entities/pokemons.json") as database:
-        pokemons = json.load(database)['pokemons']
     for pokemon in pokemons:
-        if pokemon['title_en'] == title_en:
+        if pokemon['pokedex_no'] == pokedex_no:
             requested_pokemon = pokemon
             break
     else:
-        raise Http404
-    context = {
-        'map': make_pokemon_map([pokemon]),
-        'pokemon': requested_pokemon
-    }
-    return render(request, "pokemon.html", context=context)
+        return HttpResponseNotFound('<h1>Такой покемон не найден</h1>')
+
+    folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
+    for pokemon_entity in requested_pokemon['entities']:
+        folium_map = add_pokemon(
+            folium_map, pokemon_entity['lat'], pokemon_entity['lon'],
+            pokemon['title_ru'], pokemon['img_url'])
+
+    return render(request, "pokemon.html", context={'map': folium_map._repr_html_(),
+                                                    'pokemon': pokemon})

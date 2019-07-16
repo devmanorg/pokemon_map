@@ -1,8 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
   <title>Pokemon Go map</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="shortcut icon" href="https://assets.pokemon.com/static2/_ui/img/favicon.ico">
 </head>
 <body>
   <div class="container">
@@ -26,7 +31,7 @@
               {% if pokemon.previous_evolution %}
                 <div class="col-5 clearfix p-2 m-2">
                   <div class="img-thumbnail">
-                    <a href="{% url 'pokemon' pokemon.previous_evolution.title_en %}">
+                    <a href="{% url 'pokemon' pokemon.previous_evolution.pokedex_no %}">
                       <div class="d-flex justify-content-center">
                         <img class="pull-left mr-2 float-left" src="{{pokemon.previous_evolution.img_url}}" style="height:50px; width:50px">
                         <p class="align-middle m-0" style="line-height:50px; font-size: 20px;">{{pokemon.previous_evolution.title_ru}}</p>
@@ -39,7 +44,7 @@
               {% if pokemon.next_evolution %}
                 <div class="col-5 clearfix p-2 m-2">
                   <div class="img-thumbnail">
-                    <a href="{% url 'pokemon' pokemon.next_evolution.title_en %}">
+                    <a href="{% url 'pokemon' pokemon.next_evolution.pokedex_no %}">
                       <div class="d-flex justify-content-center">
                         <img class="pull-left mr-2 float-left" src="{{pokemon.next_evolution.img_url}}" style="height:50px; width:50px">
                         <p class="align-middle m-0" style="line-height:50px; font-size: 20px;">{{pokemon.next_evolution.title_ru}}</p>
