@@ -20,7 +20,7 @@
     <div class="row mt-2">
       {% for pokemon in pokemons %}
         <div class="img-thumbnail col-6 col-sm-4 col-md-3 clearfix p-2 m-2">
-          <a href="{% url 'pokemon' pokemon.pokedex_no %}">
+          <a href="{% url 'pokemon' pokemon.pokemon_id %}">
             <div class="d-flex justify-content-center">
               <img class="pull-left mr-2 float-left" src="{{pokemon.img_url}}" style="height:50px; width:50px">
               <p class="align-middle m-0" style="line-height:50px; font-size: 20px;">{{pokemon.title_ru}}</p>

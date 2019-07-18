@@ -1,23 +1,11 @@
 { "pokemons": [
     {
+        "pokemon_id": 1,
         "title_ru": "Бульбазавр",
         "title_en": "Bulbasaur",
         "title_jp": "フシギダネ",
         "description": "cтартовый покемон двойного травяного и ядовитого типа из первого поколения и региона Канто. В национальном покедексе под номером 1. На 16 уровне эволюционирует в Ивизавра. Ивизавр на 32 уровне эволюционирует в Венузавра. Наряду с Чармандером и Сквиртлом, Бульбазавр является одним из трёх стартовых покемонов региона Канто.",
-        "pokedex_no": "001",
         "img_url": "https://upload.wikimedia.org/wikipedia/ru/c/ca/%D0%91%D1%83%D0%BB%D1%8C%D0%B1%D0%B0%D0%B7%D0%B0%D0%B2%D1%80.png",
-        "element_type": [
-            {
-                "title": "Ядовитый",
-                "img": "https://vignette.wikia.nocookie.net/pokemon/images/f/f2/%D0%AF%D0%B4%D0%BE%D0%B2%D0%B8%D1%82%D1%8B%D0%B9.png/revision/latest/scale-to-width-down/20?cb=20160720094544&path-prefix=ru",
-                "strong_against": ["Травяной"]
-            },
-            {
-                "title": "Травяной",
-                "img": "https://vignette.wikia.nocookie.net/pokemon/images/0/03/%D0%A2%D1%80%D0%B0%D0%B2%D1%8F%D0%BD%D0%BE%D0%B9.png/revision/latest/scale-to-width-down/20?cb=20160720094544&path-prefix=ru",
-                "strong_against": ["Земляной", "Каменный", "Водный"]
-            }
-        ],
         "entities": [
             {
                 "level": 15,
@@ -32,29 +20,17 @@
         ],
         "next_evolution": {
             "title_ru": "Ивизавр",
-            "pokedex_no": "002",
+            "pokemon_id": 2,
             "img_url": "https://vignette.wikia.nocookie.net/pokemon/images/7/73/002Ivysaur.png/revision/latest/scale-to-width-down/200?cb=20150703180624&path-prefix=ru"
         }
     },
     {
+        "pokemon_id": 2,
         "title_ru": "Ивизавр",
         "title_en": "Ivysaur",
         "title_jp": "フシギソウ",
         "description": "покемон двойного травяного и ядовитого типа из первого поколения покемонов. Эволюционирует из стартового покемона Бульбазавра на 16 уровне. Становится Венузавром на 32 уровне.",
-        "pokedex_no": "002",
         "img_url": "https://vignette.wikia.nocookie.net/pokemon/images/7/73/002Ivysaur.png/revision/latest/scale-to-width-down/200?cb=20150703180624&path-prefix=ru",
-        "element_type": [
-            {
-                "title": "Ядовитый",
-                "img": "https://vignette.wikia.nocookie.net/pokemon/images/f/f2/%D0%AF%D0%B4%D0%BE%D0%B2%D0%B8%D1%82%D1%8B%D0%B9.png/revision/latest/scale-to-width-down/20?cb=20160720094544&path-prefix=ru",
-                "strong_against": ["Травяной"]
-            },
-            {
-                "title": "Травяной",
-                "img": "https://vignette.wikia.nocookie.net/pokemon/images/0/03/%D0%A2%D1%80%D0%B0%D0%B2%D1%8F%D0%BD%D0%BE%D0%B9.png/revision/latest/scale-to-width-down/20?cb=20160720094544&path-prefix=ru",
-                "strong_against": ["Земляной", "Каменный", "Водный"]
-            }
-        ],
         "entities": [
             {
                 "level": 44,
@@ -69,34 +45,22 @@
         ],
         "next_evolution": {
             "title_ru": "Венузавр",
-            "pokedex_no": "003",
+            "pokemon_id": 3,
             "img_url": "https://vignette.wikia.nocookie.net/pokemon/images/a/ae/003Venusaur.png/revision/latest/scale-to-width-down/200?cb=20150703175822&path-prefix=ru"
         },
         "previous_evolution": {
             "title_ru": "Бульбазавр",
-            "pokedex_no": "001",
+            "pokemon_id": 1,
             "img_url": "https://upload.wikimedia.org/wikipedia/ru/c/ca/%D0%91%D1%83%D0%BB%D1%8C%D0%B1%D0%B0%D0%B7%D0%B0%D0%B2%D1%80.png"
         }
     },
     {
+        "pokemon_id": 3,
         "title_ru": "Венузавр",
         "title_en": "Venusaur",
         "title_jp": "フシギバナ",
         "description": "покемон двойного травяного и ядовитого типа из первого поколения покемонов. На 32 уровне эволюционирует из Ивизавра. Финальная эволюция травяного стартовика Бульбазавра. Развивается в Мега Венузавра с помощью камня Венусарита.",
-        "pokedex_no": "003",
         "img_url": "https://vignette.wikia.nocookie.net/pokemon/images/a/ae/003Venusaur.png/revision/latest/scale-to-width-down/200?cb=20150703175822&path-prefix=ru",
-        "element_type": [
-            {
-                "title": "Ядовитый",
-                "img": "https://vignette.wikia.nocookie.net/pokemon/images/f/f2/%D0%AF%D0%B4%D0%BE%D0%B2%D0%B8%D1%82%D1%8B%D0%B9.png/revision/latest/scale-to-width-down/20?cb=20160720094544&path-prefix=ru",
-                "strong_against": ["Травяной"]
-            },
-            {
-                "title": "Травяной",
-                "img": "https://vignette.wikia.nocookie.net/pokemon/images/0/03/%D0%A2%D1%80%D0%B0%D0%B2%D1%8F%D0%BD%D0%BE%D0%B9.png/revision/latest/scale-to-width-down/20?cb=20160720094544&path-prefix=ru",
-                "strong_against": ["Земляной", "Каменный", "Водный"]
-            }
-        ],
         "entities": [
             {
                 "lvl": 44,
@@ -106,7 +70,7 @@
         ],
         "previous_evolution": {
             "title_ru": "Ивизавр",
-            "pokedex_no": "002",
+            "pokemon_id": 2,
             "img_url": "https://vignette.wikia.nocookie.net/pokemon/images/7/73/002Ivysaur.png/revision/latest/scale-to-width-down/200?cb=20150703180624&path-prefix=ru"
         }
     }
