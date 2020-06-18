@@ -1,6 +1,6 @@
 # Карта покемонов
 
-![sample text](https://dvmn.org/filer/canonical/1563275070/172/)
+![screenshot](https://dvmn.org/filer/canonical/1563275070/172/)
 
 ### Предметная область
 
@@ -16,9 +16,19 @@
 
 ### Как запустить
 
-- Скачайте код
-- Установите зависимости командой `pip install -r requirements.txt`
-- Запустите сервер командой `python3 manage.py runserver`
+Для запуска сайта вам понадобится Python третьей версии.
+
+Скачайте код с GitHub. Затем установите зависимости
+
+```sh
+pip install -r requirements.txt
+```
+
+Запустите разработческий сервер
+
+```sh
+python3 manage.py runserver
+```
 
 ### Переменные окружения
 
