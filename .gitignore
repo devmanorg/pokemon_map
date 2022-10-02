@@ -1,6 +1,7 @@
 # Created by https://www.gitignore.io
 .idea
 .idea/
+*/migrations/
 
 ### OSX ###
 .DS_Store
