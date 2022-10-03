@@ -3,5 +3,5 @@ from .models import Pokemon
 
 @admin.register(Pokemon)
 class Pokemon(admin.ModelAdmin):
-    list_display = ('title',)
+    list_display = ('title', 'image')
 
