@@ -3,7 +3,7 @@ from .models import Pokemon, PokemonEntity
 
 @admin.register(Pokemon)
 class Pokemon(admin.ModelAdmin):
-    list_display = ('id', 'title', 'image')
+    list_display = ('id', 'title', 'image', 'description')
 
 
 @admin.register(PokemonEntity)
