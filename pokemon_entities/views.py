@@ -1,5 +1,4 @@
 import folium
-import json
 from django.utils.timezone import localtime
 from django.http import HttpResponseNotFound
 from django.shortcuts import render
@@ -28,8 +27,6 @@ def add_pokemon(folium_map, lat, lon, image_url=DEFAULT_IMAGE_URL):
 
 
 def show_all_pokemons(request):
-    # with open('pokemon_entities/pokemons.json', encoding='utf-8') as database:
-    #     pokemons = json.load(database)['pokemons']
     pokemons = Pokemon.objects.filter(pokemonentity__appeared_at__lt=localtime(), pokemonentity__disappeared_at__gt=localtime())
 
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
@@ -56,8 +53,6 @@ def show_all_pokemons(request):
 
 
 def show_pokemon(request, pokemon_id):
-    # with open('pokemon_entities/pokemons.json', encoding='utf-8') as database:
-    #     pokemons = json.load(database)['pokemons']
     pokemons = Pokemon.objects.filter(pokemon_id=pokemon_id)
     for pokemon in pokemons:
         if pokemon.id == int(pokemon_id):
@@ -73,12 +68,6 @@ def show_pokemon(request, pokemon_id):
             pokemon_entity.longitude,
             request.build_absolute_uri(f'{pokemon.image.url}')
         )
-
-    # "previous_evolution": {
-    #     "title_ru": "Ивизавр",
-    #     "pokemon_id": 2,
-    #     "img_url": "https://vignette.wikia.nocookie.net/pokemon/images/7/73/002Ivysaur.png/revision/latest/scale-to-width-down/200?cb=20150703180624&path-prefix=ru"
-    # }
 
     return render(request, 'pokemon.html', context={
         'map': folium_map._repr_html_(), 'pokemon': pokemon
