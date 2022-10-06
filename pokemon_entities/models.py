@@ -1,9 +1,8 @@
 from django.db import models
-from django.utils.datetime_safe import datetime
-from django.utils.timezone import localtime
+
 
 class Pokemon(models.Model):
-    pokemon_id = models.IntegerField(verbose_name='Номер_эволюции', default=1,)
+    pokemon_id = models.IntegerField(verbose_name='Номер_эволюции', default=1, unique=True)
     title = models.CharField(max_length=200, verbose_name='Имя')
     image = models.ImageField(verbose_name='Изображение')
     description = models.TextField(blank=True, default='', verbose_name='Описание')
@@ -17,7 +16,7 @@ class Pokemon(models.Model):
         return None
 
     def next_evolution(self):
-        count_pokemon_id = Pokemon.objects.values("pokemon_id").distinct().count()
+        count_pokemon_id = Pokemon.objects.values("pokemon_id").count()
         if self.pokemon_id >= count_pokemon_id:
             return None
         return Pokemon.objects.get(pokemon_id=(self.pokemon_id+1))
