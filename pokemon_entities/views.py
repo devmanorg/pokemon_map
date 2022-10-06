@@ -58,7 +58,7 @@ def show_all_pokemons(request):
 def show_pokemon(request, pokemon_id):
     # with open('pokemon_entities/pokemons.json', encoding='utf-8') as database:
     #     pokemons = json.load(database)['pokemons']
-    pokemons = Pokemon.objects.filter(id=pokemon_id)
+    pokemons = Pokemon.objects.filter(pokemon_id=pokemon_id)
     for pokemon in pokemons:
         if pokemon.id == int(pokemon_id):
             requested_pokemon = pokemon
@@ -73,6 +73,12 @@ def show_pokemon(request, pokemon_id):
             pokemon_entity.longitude,
             request.build_absolute_uri(f'{pokemon.image.url}')
         )
+
+    # "previous_evolution": {
+    #     "title_ru": "Ивизавр",
+    #     "pokemon_id": 2,
+    #     "img_url": "https://vignette.wikia.nocookie.net/pokemon/images/7/73/002Ivysaur.png/revision/latest/scale-to-width-down/200?cb=20150703180624&path-prefix=ru"
+    # }
 
     return render(request, 'pokemon.html', context={
         'map': folium_map._repr_html_(), 'pokemon': pokemon
