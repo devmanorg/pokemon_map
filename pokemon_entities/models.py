@@ -5,9 +5,9 @@ class Pokemon(models.Model):
     pokemon_id = models.IntegerField(verbose_name='Номер_эволюции', default=1, unique=True)
     title = models.CharField(max_length=200, verbose_name='Имя')
     image = models.ImageField(verbose_name='Изображение')
-    description = models.TextField(blank=True, default='', verbose_name='Описание')
-    title_en = models.CharField(max_length=200, default='', blank=True, verbose_name='Английское_имя')
-    title_jp = models.CharField(max_length=200, default='', blank=True, verbose_name='Японское_имя')
+    description = models.TextField(blank=True, verbose_name='Описание')
+    title_en = models.CharField(max_length=200, blank=True, verbose_name='Английское_имя')
+    title_jp = models.CharField(max_length=200, blank=True, verbose_name='Японское_имя')
 
     def previous_evolution(self):
         if self.pokemon_id:
