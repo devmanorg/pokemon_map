@@ -25,29 +25,29 @@
         <p><b>{{pokemon.title}}</b> (анг. {{pokemon.title_en}}, яп. {{pokemon.title_jp}}) — {{pokemon.description}}</p>
         <hr>
         <div class="mt-4">
-          {% if pokemon.next_evolution or pokemon.previous_evolution %}
+          {% if pokemon_evolution.next_evolution or pokemon_evolution.previous_evolution %}
             <h4 class="mb-0">Эволюции покемона</h4>
             <div class="row">
-              {% if pokemon.previous_evolution %}
+              {% if pokemon_evolution.previous_evolution %}
                 <div class="col-5 clearfix p-2 m-2">
                   <div class="img-thumbnail">
-                    <a href="{% url 'pokemon' pokemon.previous_evolution.pokemon_id %}">
+                    <a href="{% url 'pokemon' pokemon_evolution.previous_evolution.pokemon_id %}">
                       <div class="d-flex justify-content-center">
-                        <img class="pull-left mr-2 float-left" src="{{pokemon.previous_evolution.image.url}}" style="height:50px; width:50px">
-                        <p class="align-middle m-0" style="line-height:50px; font-size: 20px;">{{pokemon.previous_evolution.title}}</p>
+                        <img class="pull-left mr-2 float-left" src="{{pokemon_evolution.previous_evolution.image.url}}" style="height:50px; width:50px">
+                        <p class="align-middle m-0" style="line-height:50px; font-size: 20px;">{{pokemon_evolution.previous_evolution.title}}</p>
                       </div>
                     </a>
                   </div>
                   <h6 class="d-flex justify-content-center m-2">Из кого эволюционировал</h6>
                 </div>
               {% endif %}
-              {% if pokemon.next_evolution %}
+              {% if pokemon_evolution.next_evolution %}
                 <div class="col-5 clearfix p-2 m-2">
                   <div class="img-thumbnail">
-                    <a href="{% url 'pokemon' pokemon.next_evolution.pokemon_id %}">
+                    <a href="{% url 'pokemon' pokemon_evolution.next_evolution.pokemon_id %}">
                       <div class="d-flex justify-content-center">
-                        <img class="pull-left mr-2 float-left" src="{{pokemon.next_evolution.image.url}}" style="height:50px; width:50px">
-                        <p class="align-middle m-0" style="line-height:50px; font-size: 20px;">{{pokemon.next_evolution.title}}</p>
+                        <img class="pull-left mr-2 float-left" src="{{pokemon_evolution.next_evolution.image.url}}" style="height:50px; width:50px">
+                        <p class="align-middle m-0" style="line-height:50px; font-size: 20px;">{{pokemon_evolution.next_evolution.title}}</p>
                       </div>
                     </a>
                   </div>

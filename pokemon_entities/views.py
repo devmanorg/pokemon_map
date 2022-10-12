@@ -54,6 +54,13 @@ def show_all_pokemons(request):
 
 def show_pokemon(request, pokemon_id):
     pokemon = get_object_or_404(Pokemon, pokemon_id=pokemon_id)
+    pokemon_evolution = {}
+    if pokemon.previous_evolution:
+        previous_evolution = pokemon.previous_evolution
+        pokemon_evolution['previous_evolution'] = previous_evolution
+    if pokemon.next_evolutions.all():
+        next_evolutions = pokemon.next_evolutions.all()
+        pokemon_evolution['next_evolution'] = next_evolutions[0]
 
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
     for pokemon_entity in pokemon.pokemonentity_set.all():
@@ -64,5 +71,5 @@ def show_pokemon(request, pokemon_id):
         )
 
     return render(request, 'pokemon.html', context={
-        'map': folium_map._repr_html_(), 'pokemon': pokemon
+        'map': folium_map._repr_html_(), 'pokemon': pokemon, 'pokemon_evolution': pokemon_evolution
     })
