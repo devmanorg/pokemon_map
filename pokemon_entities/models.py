@@ -7,7 +7,7 @@ class Pokemon(models.Model):
 
     def __str__(self):
         return self.title
-    
+
 
 class PokemonEntity(models.Model):
     pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE)
@@ -15,4 +15,8 @@ class PokemonEntity(models.Model):
     longitude = models.FloatField('Долгота')
     appeared_at = models.DateTimeField('Время появления')
     disappeared_at = models.DateTimeField('Время исчезновения')
-    
+    level = models.IntegerField('Уровень')
+    health = models.IntegerField('Здоровье')
+    strength = models.IntegerField('Атака')
+    defence = models.IntegerField('Защита')
+    stamina = models.IntegerField('Выносливость')
