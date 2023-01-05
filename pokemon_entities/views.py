@@ -44,11 +44,15 @@ def show_all_pokemons(request):
     pokemons_for_page = Pokemon.objects.all()
     pokemons_on_page = []
     for pokemon in pokemons_for_page:
+        try:
+            image_url = request.build_absolute_uri(
+                pokemon.image.url
+            )
+        except:
+            image = None
         pokemons_on_page.append({
             'pokemon_id': pokemon.id,
-            'img_url': request.build_absolute_uri(
-                f'media/{pokemon.image}'
-            ),
+            'img_url': image_url,
             'title_ru': pokemon.title,
         })
 
