@@ -1,8 +1,8 @@
 import folium
-import json
+
 from django.utils import timezone
 from django.http import HttpResponseNotFound
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Pokemon, PokemonEntity
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -66,26 +66,13 @@ def show_all_pokemons(request):
 
 def show_pokemon(request, pokemon_id):
     try:
-        pokemon = Pokemon.objects.get(id=pokemon_id)
+        pokemon = get_object_or_404(Pokemon, id=pokemon_id)
     except ObjectDoesNotExist:
         return HttpResponseNotFound('<h1>Такой покемон не найден</h1>')
 
     folium_map = folium.Map(location=MOSCOW_CENTER, zoom_start=12)
     image_url = request.build_absolute_uri(pokemon.image.url)
     time_now = timezone.now()
-
-    previous_evolution = {}
-    if pokemon.previous_evolution:
-        previous_evolution = {
-            "title_ru": pokemon.previous_evolution.title,
-            "pokemon_id": pokemon.previous_evolution.id,
-            "img_url": request.build_absolute_uri(pokemon.previous_evolution.image.url),
-            'description': pokemon.previous_evolution.description,
-            'title_en': pokemon.previous_evolution.title_en,
-            'title_jp': pokemon.previous_evolution.title_jp,
-        }
-
-
     pokemon_entities = PokemonEntity.objects.filter(
         pokemon=pokemon,
         appeared_at__lte=time_now,
@@ -98,6 +85,25 @@ def show_pokemon(request, pokemon_id):
             pokemon_entity.longitude,
             image_url
         )
+    previous_evolution = {}
+    if pokemon.previous_evolution:
+        previous_evolution = {
+            "title_ru": pokemon.previous_evolution.title,
+            "pokemon_id": pokemon.previous_evolution.id,
+            "img_url": request.build_absolute_uri(pokemon.previous_evolution.image.url),
+            'description': pokemon.previous_evolution.description,
+            'title_en': pokemon.previous_evolution.title_en,
+            'title_jp': pokemon.previous_evolution.title_jp,
+        }
+    try:
+        next_pokemon = pokemon.next_evolution.get()
+        next_evolution = {
+            "title_ru": next_pokemon.title,
+            "pokemon_id": next_pokemon.id,
+            "img_url": request.build_absolute_uri(next_pokemon.image.url)
+        }
+    except Pokemon.DoesNotExist:
+        next_evolution = {}
 
     return render(request, 'pokemon.html', context={
         'map': folium_map._repr_html_(), 
@@ -109,5 +115,6 @@ def show_pokemon(request, pokemon_id):
             'title_jp': pokemon.title_jp,
             'description': pokemon.description,
             'previous_evolution': previous_evolution,
+            'next_evolution': next_evolution,
         }
     })

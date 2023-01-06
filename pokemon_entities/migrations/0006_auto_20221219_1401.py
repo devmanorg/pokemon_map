@@ -3,13 +3,16 @@
 from django.db import migrations
 
 def copy_entity(apps, schema_editor):
-    NewPokemonEntity = apps.get_model('pokemon_entities', 'PokemonEntity')
-    for pokemon_entity in NewPokemonEntity.objects.all():
-        pokemon = pokemon_entity.pokemon
-        latitude = pokemon_entity.latitude
-        longitude = pokemon_entity.longitude
-        appeared_at = pokemon_entity.appeared_at
-        disappeared_at = pokemon_entity.disappeared_at
+    NewPokemonEntity = apps.get_model('pokemon_entities', 'NewPokemonEntity')
+    PokemonEntity = apps.get_model('pokemon_entities', 'PokemonEntity')
+    for pokemon_entity in PokemonEntity.objects.all():
+        NewPokemonEntity.objects.get_or_create(
+            pokemon=pokemon_entity.pokemon,
+            latitude=pokemon_entity.latitude,
+            longitude=pokemon_entity.longitude,
+            appeared_at=pokemon_entity.appeared_at,
+            disappeared_at=pokemon_entity.disappeared_at,
+        )
 
 
 class Migration(migrations.Migration):
