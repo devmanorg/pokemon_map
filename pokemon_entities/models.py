@@ -8,7 +8,7 @@ class Pokemon(models.Model):
     description = models.TextField('Описание', blank=True)
     image = models.ImageField('Картинка', null=True, blank=True)
     previous_evolution = models.ForeignKey(
-        "self",
+        "Pokemon",
         on_delete=models.SET_NULL,
         verbose_name='Предыдущая эволюция',
         null=True,
@@ -31,3 +31,7 @@ class PokemonEntity(models.Model):
     strength = models.IntegerField('Атака')
     defence = models.IntegerField('Защита')
     stamina = models.IntegerField('Выносливость')
+
+    def __str__(self):
+        return f"{self.pokemon}: {self.latitude}, {self.longitude}"
+        
