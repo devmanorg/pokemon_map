@@ -98,14 +98,15 @@ def show_pokemon(request, pokemon_id):
             'title_en': pokemon.previous_evolution.title_en,
             'title_jp': pokemon.previous_evolution.title_jp,
         }
-    try:
-        next_pokemon = pokemon.next_evolutions.get()
+    
+    next_pokemon = pokemon.next_evolutions.all().first()
+    if next_pokemon:
         next_evolution = {
             "title_ru": next_pokemon.title,
             "pokemon_id": next_pokemon.id,
             "img_url": request.build_absolute_uri(next_pokemon.image.url)
         }
-    except Pokemon.DoesNotExist:
+    else:
         next_evolution = {}
 
     return render(request, 'pokemon.html', context={
