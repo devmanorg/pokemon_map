@@ -36,14 +36,14 @@ def show_all_pokemons(request):
         disappeared_at__gte=time_now
     )
     for pokemon_entity in pokemon_entities:
-        if pokemon_entity.pokemon.image.url:
+        try:
             add_pokemon(
                 folium_map,
                 pokemon_entity.latitude,
                 pokemon_entity.longitude,
                 request.build_absolute_uri(pokemon_entity.pokemon.image.url)
             )
-        else:
+        except ValueError:
             add_pokemon(folium_map, pokemon_entity.latitude, pokemon_entity.longitude)
 
     pokemons_for_page = Pokemon.objects.all()
@@ -99,7 +99,7 @@ def show_pokemon(request, pokemon_id):
             'title_jp': pokemon.previous_evolution.title_jp,
         }
     try:
-        next_pokemon = pokemon.next_evolution.get()
+        next_pokemon = pokemon.next_evolutions.get()
         next_evolution = {
             "title_ru": next_pokemon.title,
             "pokemon_id": next_pokemon.id,
