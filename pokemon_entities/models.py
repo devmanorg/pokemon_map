@@ -19,6 +19,10 @@ class Pokemon(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = 'Тип покемона'
+        verbose_name_plural = 'Типы покемонов'
+
 
 class PokemonEntity(models.Model):
     pokemon = models.ForeignKey(
@@ -39,3 +43,7 @@ class PokemonEntity(models.Model):
 
     def __str__(self):
         return f"{self.pokemon}: {self.latitude}, {self.longitude}"
+
+    class Meta:
+        verbose_name = 'Покемон'
+        verbose_name_plural = 'Покемоны'
