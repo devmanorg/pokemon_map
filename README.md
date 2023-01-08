@@ -18,6 +18,14 @@
 
 Для запуска сайта вам понадобится Python третьей версии.
 
+Создайте и активируйте виртуальное окружение
+
+```sh
+python -m venv venv
+source ./venv/Scripts/activate  #для Windows
+source ./venv/bin/activate      #для Linux и macOS
+```
+
 Скачайте код с GitHub. Затем установите зависимости
 
 ```sh
