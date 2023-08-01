@@ -7,6 +7,11 @@ class Pokemon(models.Model):
     photo = models.ImageField(upload_to='images', null=True, blank=True)
     appeared_at = models.DateTimeField(default=now)
     disappeared_at = models.DateTimeField(default=now)
+    level = models.IntegerField(blank=True)
+    health = models.IntegerField(blank=True)
+    strength = models.IntegerField(blank=True)
+    defence = models.IntegerField(blank=True)
+    stamina = models.IntegerField(blank=True)
     def __str__(self):
         return '{}'.format(self.title)
     
