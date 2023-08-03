@@ -15,6 +15,7 @@ class Pokemon(models.Model):
     strength = models.IntegerField(blank=True)
     defence = models.IntegerField(blank=True)
     stamina = models.IntegerField(blank=True)
+    previous_evolution = models.ForeignKey("self", on_delete=models.SET_NULL, null=True, blank=True)
     def __str__(self):
         return '{}'.format(self.title)
     
