@@ -47,8 +47,6 @@ def show_all_pokemons(request):
             'img_url': request.build_absolute_uri(f'/media/{pokemon.photo}'),
             'title_ru': pokemon.title,
         })
-    
-
     return render(request, 'mainpage.html', context={
         'map': folium_map._repr_html_(),
         'pokemons': pokemons_on_page,
@@ -56,13 +54,11 @@ def show_all_pokemons(request):
 
 
 def show_pokemon(request, pokemon_id):
-    for pokemon in Pokemon.objects.all():
-        print(pokemon.id)
-     
     pokemon = Pokemon.objects.get(id = int(pokemon_id))
     requested_pokemon = {"pokemon_id":pokemon.id,
-                         "title_ru": pokemon.title,
-                         "img_url":request.build_absolute_uri(f'/media/{pokemon.photo}')
+                         "title_ru":pokemon.title,
+                         "img_url":request.build_absolute_uri(f'/media/{pokemon.photo}'),
+                         "description":pokemon.description,
                          }
         
     #except:
