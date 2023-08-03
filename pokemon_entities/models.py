@@ -3,7 +3,9 @@ from django.utils.timezone import now
 
 class Pokemon(models.Model):
     id = models.AutoField(auto_created=True, primary_key=True)
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, blank=True)
+    title_en = models.CharField(max_length=200, blank=True)
+    title_jp = models.CharField(max_length=200, blank=True)
     photo = models.ImageField(upload_to='images', null=True, blank=True)
     appeared_at = models.DateTimeField(default=now)
     disappeared_at = models.DateTimeField(default=now)
