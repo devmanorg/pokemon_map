@@ -1,5 +1,4 @@
 import folium
-import json
 from django.utils.timezone import localtime, now
 from django.http import HttpResponseNotFound
 from django.shortcuts import render
@@ -56,7 +55,6 @@ def show_all_pokemons(request):
 def show_pokemon(request, pokemon_id):
     try:
         pokemon = Pokemon.objects.get(id = int(pokemon_id))
-        print(pokemon.next_gen.all())
         previous_evolution, next_evolution = {}, {}
         if pokemon.previous_evolution:
             previous_evolution = {"title_ru": pokemon.previous_evolution.title,
