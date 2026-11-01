@@ -4,7 +4,10 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
 
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maplibre-gl@5.6.1/dist/maplibre-gl.css"/>
   <title>Pokemon Go map</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="shortcut icon" href="https://assets.pokemon.com/static2/_ui/img/favicon.ico">
@@ -75,9 +78,59 @@
 
     <h1 class="mt-5 mb-2">Карта {{pokemon.title}} в Москве</h1>
     <div class="mb-5">
-      {{map|safe}}  
+      <div id="pokemon-map" style="height: 600px; width: 100%;"></div> 
     </div>
   </div>
   
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/maplibre-gl@5.6.1/dist/maplibre-gl.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@maplibre/maplibre-gl-leaflet@0.1.4/leaflet-maplibre-gl.js"></script>
+
+  {{ pokemon.entities|json_script:"pokemon-entities" }}
+  {{ pokemon.img_url|json_script:"pokemon-image" }}
+
+  <script>
+    const map = L.map('pokemon-map').setView({{ moscow_center }}, 12);
+
+    L.maplibreGL({
+      style: 'https://tiles.openfreemap.org/styles/liberty'
+    }).addTo(map);
+
+    const entities = JSON.parse(
+      document.getElementById('pokemon-entities').textContent
+    );
+
+    const imageUrl = JSON.parse(
+      document.getElementById('pokemon-image').textContent
+    );
+
+    const pokemonIcon = L.icon({
+      iconUrl: imageUrl,
+      iconSize: [50, 50],
+      iconAnchor: [25, 25]
+    });
+
+    entities.forEach(function (entity) {
+      const marker = L.marker(
+        [entity.lat, entity.lon],
+          {icon: pokemonIcon}
+        ).addTo(map);
+        
+      marker.bindPopup('Уровень: ' + entity.level);
+    });
+
+    if (entities.length > 0) {
+      const bounds = L.latLngBounds(
+        entities.map(function (entity) {
+          return [entity.lat, entity.lon];
+        })
+      );
+
+      map.fitBounds(bounds, {
+        padding: [30, 30],
+        maxZoom: 15
+      });
+    }
+  </script>
 </body>
 </html>
